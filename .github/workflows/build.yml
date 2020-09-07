@@ -1,0 +1,22 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build-dart-latest:
+
+    runs-on: ubuntu-latest
+
+    container:
+      image:  plugfox/flutter:stable
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: flutter pub upgrade
+    - name: Run dependency validator
+      run: pub run dependency_validator --ignore cupertino_icons,dart_code_metrics
+    - name: Run dartanalyzer
+      run: dartanalyzer --fatal-warnings --fatal-infos --fatal-lints lib/ test/
+    - name: Run dartfmt
+      run: dartfmt --line-length 120 --set-exit-if-changed -n .
