@@ -1,3 +1,1 @@
-# yafb_reader
-
-Yet Another FictionBook Reader
+# Yet Another FictionBook Reader
